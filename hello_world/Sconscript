@@ -1,0 +1,6 @@
+#coding=utf-8
+import os, sys
+Import('env')
+env = env.Clone()
+SConscript("util/SConscript")
+SConscript("bin/SConscript")
