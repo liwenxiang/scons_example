@@ -3,7 +3,7 @@
 #include "easylog/easylog.h"
 #include "hello_world/util/unit.h"
 
-INITIALIZE_EASYLOGGINGPP
+_INITIALIZE_EASYLOGGINGPP
 int main ( int argc, char *argv[] )
 {
     Unit x;

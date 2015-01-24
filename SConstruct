@@ -5,9 +5,9 @@ env.Clone()
 env["project_name"] = "hello_world"
 env["CXX"] = "ccache g++"
 
-env["CCFLAGS"] = "-std=c++11 -Wall -g"
+env["CCFLAGS"] = "-g"
 
-env["depend_include_path"] = ['/home/liwenxiang/depend_lib/include/']
+env["depend_include_path"] = ['/Users/liwenxiang/Program/depend_lib/include/']
 env.Append(CPPPATH = ['#'] +  env["depend_include_path"])
 
 env["depend_3rd_lib_path"] = ['']
