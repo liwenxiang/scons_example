@@ -1,22 +1,39 @@
 #coding=utf-8
 env = Environment()
 env.Clone()
-import os
 
+env["project_name"] = "hello_world"
+env["CXX"] = "ccache g++"
 
-env["systerm_include"] = ['']
-env["user_include"] = ['']
-env.Append(CPPPATH = ['#'] + env["systerm_include"] + env["user_include"])
+env["CCFLAGS"] = "-std=c++11 -Wall -g"
 
+env["depend_include_path"] = ['/home/liwenxiang/depend_lib/include/']
+env.Append(CPPPATH = ['#'] +  env["depend_include_path"])
 
-env["build_lib"] = ["#/build/lib/"]
-env["systerm_lib_path"] = ['']
-env["user_lib_path"] = ['']
-env.Append(LIBPATH = env["systerm_lib_path"] + env["user_lib_path"] + env["build_lib"])
+env["depend_3rd_lib_path"] = ['']
+env["build_lib_path"] = ["#/build/lib/"]
+env.Append(LIBPATH =  env["depend_3rd_lib_path"] + env["build_lib_path"])
+env['run_case_lib_path'] =  env["depend_3rd_lib_path"] + ["build/lib/"]
 
-env["system_lib"] = ['m']
-env["use_lib"] = ['unit']
-env["all_libs"] = env["system_lib"] + env["use_lib"]
+env["depend_3rd_libs"] = []
+env["bin_depend_libs"] = ['util']
+env["all_libs"] = env["depend_3rd_libs"] + env["bin_depend_libs"]
+
+env['install_lib_root'] = ['#/build/install/lib/']
+env['install_head_root'] = '#/build/install/header/'  + env["project_name"] + "/"
+
+def run_ut(ut_env, target, source, libs):
+    do_test_main_cpp = '#/hello_world/common/do_test.cpp'
+    source = source + [do_test_main_cpp]
+    program = ut_env.Program(target=target, source=source, LIBS=libs)
+    run_str = "/usr/bin/env LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+    for dir in env['run_case_lib_path']:
+        run_str = run_str + ":" + dir
+    run_str = run_str + " " + program[0].abspath
+    test_alias = Alias('test', [program], run_str)
+    AlwaysBuild(test_alias)
+
+env["run_ut"] = run_ut
 
 #Export 和子目录的Import对应，是为了传递env变量
 Export('env')
