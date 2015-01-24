@@ -1,0 +1,8 @@
+#coding=utf-8
+import os, sys
+Import('env')
+env = env.Clone()
+cpps = Glob("*.cpp")
+
+bin = env.Program(target = "hello_bin", source=cpps, 
+        LIBS = env["all_libs"])

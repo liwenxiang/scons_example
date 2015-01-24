@@ -1,6 +1,0 @@
-import os, sys
-Import('env')
-env = env.Clone()
-
-lib = env.SharedLibrary("unit.cpp")
-env.Install(env["build_lib"], lib)
