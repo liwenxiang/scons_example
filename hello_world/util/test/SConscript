@@ -2,4 +2,4 @@ import os, sys
 Import('env')
 env = env.Clone()
 cpps = Glob("*_test.cpp")
-env["run_ut"](env, 'util_test', cpps, env["depend_3rd_libs"] + ['util'])
+env["run_ut"](env, 'util_test', cpps, env["depend_3rd_libs"] + ['add_tool'])

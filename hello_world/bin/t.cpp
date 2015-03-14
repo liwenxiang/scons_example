@@ -1,13 +1,14 @@
-#include <stdlib.h>
-#include <iostream>
-#include "easylog/easylog.h"
-#include "hello_world/util/unit.h"
-
+#include "easylog/easylogging++.h"
 INITIALIZE_EASYLOGGINGPP
-int main ( int argc, char *argv[] )
-{
-    Unit x;
+
+#include "hello_world/util/unit.h"
+int main() {
     LOG(INFO) << "My first info log using default logger";
-    std::cout << x.add(1, 2) << std::endl;
-    return EXIT_SUCCESS;
-}		
+
+    el::Logger* defaultLogger = el::Loggers::getLogger("default");
+
+    Unit tool;
+    defaultLogger->info("result is %d", tool.add(1, 100));
+
+    return 0;
+}

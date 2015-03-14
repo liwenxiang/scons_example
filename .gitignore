@@ -1,3 +1,5 @@
 .sconsign.dblite
 build/*
 .DStore
+logs/*
+hello_world/common/do_test.o

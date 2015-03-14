@@ -3,23 +3,23 @@ env = Environment()
 env.Clone()
 
 env["project_name"] = "hello_world"
-env["CXX"] = "ccache g++"
-
-env["CCFLAGS"] = "-std=c++11 -Wall -g"
+env["CXX"] = "ccache g++ -pthread"
+env["CCFLAGS"] = "-std=c++11 -g"
 
 env["depend_include_path"] = ['/home/liwenxiang/depend_lib/include/']
 env.Append(CPPPATH = ['#'] +  env["depend_include_path"])
 
-env["depend_3rd_lib_path"] = ['']
+env["depend_3rd_lib_path"] = ['/home/liwenxiang/depend_lib/lib/']
 env["build_lib_path"] = ["#/build/lib/"]
 env.Append(LIBPATH =  env["depend_3rd_lib_path"] + env["build_lib_path"])
 env['run_case_lib_path'] =  env["depend_3rd_lib_path"] + ["build/lib/"]
 
-env["depend_3rd_libs"] = []
-env["bin_depend_libs"] = ['util']
+env["depend_3rd_libs"] = ['']
+env["bin_depend_libs"] = ['add_tool']
 env["all_libs"] = env["depend_3rd_libs"] + env["bin_depend_libs"]
 
 env['install_lib_root'] = ['#/build/install/lib/']
+env['install_bin_root'] = ['#/build/install/bin/']
 env['install_head_root'] = '#/build/install/header/'  + env["project_name"] + "/"
 
 def run_ut(ut_env, target, source, libs):
