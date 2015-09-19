@@ -3,22 +3,23 @@ env = Environment()
 env.Clone()
 
 env["project_name"] = "hello_world"
-env["CXX"] = "ccache g++"
+# env["CXX"] = "g++ -stdlib=libstdc++ -lstdc++"
 
 env["CCFLAGS"] = "-g"
 
-env["depend_include_path"] = ['/Users/liwenxiang/Program/depend_lib/include/']
+env["depend_include_path"] = ['/Users/liwenxiang/Documents/project/']
 env.Append(CPPPATH = ['#'] +  env["depend_include_path"])
 
-env["depend_3rd_lib_path"] = ['']
+env["depend_3rd_lib_path"] = ['/Users/liwenxiang/Documents/project//log4z/lib/']
 env["build_lib_path"] = ["#/build/lib/"]
 env.Append(LIBPATH =  env["depend_3rd_lib_path"] + env["build_lib_path"])
 env['run_case_lib_path'] =  env["depend_3rd_lib_path"] + ["build/lib/"]
 
-env["depend_3rd_libs"] = []
+env["depend_3rd_libs"] = ['log4z']
 env["bin_depend_libs"] = ['util']
 env["all_libs"] = env["depend_3rd_libs"] + env["bin_depend_libs"]
 
+env['install_bin_root'] = ['#/build/install/bin/']
 env['install_lib_root'] = ['#/build/install/lib/']
 env['install_head_root'] = '#/build/install/header/'  + env["project_name"] + "/"
 

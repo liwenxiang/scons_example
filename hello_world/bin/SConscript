@@ -6,3 +6,4 @@ cpps = Glob("*.cpp")
 
 bin = env.Program(target = "hello_bin", source=cpps, 
         LIBS = env["all_libs"])
+env.Alias("install", env.Install(env["install_bin_root"], bin))

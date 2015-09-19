@@ -1,13 +1,19 @@
 #include <stdlib.h>
 #include <iostream>
-#include "easylog/easylog.h"
+#include "log4z/log4z.h"
 #include "hello_world/util/unit.h"
+using namespace zsummer::log4z;
 
-_INITIALIZE_EASYLOGGINGPP
 int main ( int argc, char *argv[] )
 {
     Unit x;
-    LOG(INFO) << "My first info log using default logger";
-    std::cout << x.add(1, 2) << std::endl;
+    int i = 0;
+    ILog4zManager::getRef().start();
+    LOGD("debug stream" << i);
+    LOGI("info stream" << i);
+
+    LOGFMTD("debug stream %d", i);
+    LOGFMTD("info stream %d", i);
+    LOGFMTE("error stream %d", x.add(1,2));
     return EXIT_SUCCESS;
 }		
