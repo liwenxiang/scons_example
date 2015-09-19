@@ -1,0 +1,6 @@
+#coding=utf-8
+env = Environment()
+env.Clone()
+cpps = Glob("*.cpp")
+env.StaticLibrary(target = "log4z", source = cpps)
+env.SharedLibrary(target = "log4z", source = cpps)
