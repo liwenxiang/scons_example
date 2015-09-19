@@ -2,6 +2,8 @@
 env = Environment()
 env.Clone()
 
+
+
 env["project_name"] = "hello_world"
 env["CXX"] = "ccache g++"
 env.Append(CCFLAGS = ['-std=c++11', '-Wall', '-g', '-pthread'])
@@ -15,7 +17,7 @@ env.Append(LIBPATH =  env["depend_3rd_lib_path"] + env["build_lib_path"])
 env['run_case_lib_path'] =  env["depend_3rd_lib_path"] + ["build/lib/"]
 
 env["depend_3rd_libs"] = ['log4z', 'pthread']
-env["bin_depend_libs"] = ['util']
+env["bin_depend_libs"] = [env["project_name"] + '_base_util']
 env["all_libs"] = env["bin_depend_libs"] + env["depend_3rd_libs"] 
 
 env['install_bin_root'] = ['#/build/install/bin/']

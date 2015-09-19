@@ -3,12 +3,15 @@ Import('env')
 env = env.Clone()
 
 cpps = Glob("*.cpp")
-lib = env.SharedLibrary(target = "util", source = cpps)
-env.Install(env["build_lib_path"], lib)
+static_lib = env.StaticLibrary(target = env["project_name"] + "_base_util", source = cpps)
+env.Install(env["build_lib_path"], static_lib)
 
+#shared_lib = env.SharedLibrary(target = env["project_name"] + "_base_util", source = cpps)
+#env.Install(env["build_lib_path"], shared_lib)
 
 header_install_dir = [env['install_head_root']  + "util/"]
 env.Alias("install", env.Install(header_install_dir, Glob("*.h")))
-env.Alias("install", env.Install(env["install_lib_root"], lib))
+env.Alias("install", env.Install(env["install_lib_root"], static_lib))
+#env.Alias("install", env.Install(env["install_lib_root"], shared_lib))
 
 SConscript("test/SConscript")
