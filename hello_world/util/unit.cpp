@@ -3,7 +3,6 @@
 #include "hello_world/util/unit.h"
 #include "log4z/log4z.h"
 
-using std::vector;
 using std::string;
 int Unit::add(int x, int y) {
     int result = x + y;

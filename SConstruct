@@ -3,14 +3,15 @@ env = Environment()
 env.Clone()
 
 env["project_name"] = "hello_world"
-# env["CXX"] = "g++ -stdlib=libstdc++ -lstdc++"
-
-env["CCFLAGS"] = "-g"
+env["CXX"] = "ccache g++ -pthread"
+env["CCFLAGS"] = "-std=c++11 -g"
 
 env["depend_include_path"] = ['/Users/liwenxiang/Documents/project/']
 env.Append(CPPPATH = ['#'] +  env["depend_include_path"])
 
 env["depend_3rd_lib_path"] = ['/Users/liwenxiang/Documents/project//log4z/lib/']
+#env["depend_3rd_lib_path"] = ['/home/liwenxiang/depend_lib/lib/']
+
 env["build_lib_path"] = ["#/build/lib/"]
 env.Append(LIBPATH =  env["depend_3rd_lib_path"] + env["build_lib_path"])
 env['run_case_lib_path'] =  env["depend_3rd_lib_path"] + ["build/lib/"]
